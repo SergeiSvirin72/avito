@@ -1,0 +1,30 @@
+version: '3'
+services:
+  app:
+    build: .
+    image: ssvirin/app
+    container_name: ssvirin_app_test
+    volumes:
+      - ./:/app
+    tty: true
+    environment:
+      - ENV_ROOT=../
+      - ENV=test
+    depends_on:
+      - db_test
+      - cache_test
+
+  db_test:
+    image: postgres:16.2
+    container_name: ssvirin_db_test
+    environment:
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5432:5432'
+
+  cache_test:
+    image: redis:7.2.4
+    container_name: ssvirin_cache_test
+    ports:
+      - '6379:6379'
+    command: redis-server

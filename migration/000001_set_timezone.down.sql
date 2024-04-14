@@ -1,0 +1,1 @@
+ALTER DATABASE postgres SET TIMEZONE TO 'Etc/UTC';
